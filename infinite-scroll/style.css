@@ -8,7 +8,8 @@ body {
 	margin: 0;
 	min-height: 100vh;
 	font-family: "Montserrat", sans-serif;
-	background-color: cornsilk;
+	/* background-color: cornsilk; */
+	background-color: rgb(240, 252, 255);
 }
 
 h1,
@@ -18,4 +19,46 @@ h2 {
 	margin-bottom: 15px;
 	font-size: 35px;
 	letter-spacing: 4px;
+}
+
+/* Loader/Spinner */
+.loader {
+	position: fixed; /* it won't move regardless if the user moves */
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background: rgba(255,255,255, 0.7);
+}
+
+/* target the image which is a child of the class, 'loader' */
+.loader img {
+	position: fixed; /* stays there even if user is scrolling; it's fixed in one spot */
+	/* the trick for the spinner to get in the center, correctly aligned */
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);	/* the x and y axis; it centers the image based on the top left corner of the image and not the page */
+}
+
+/* Image Container */
+.image-container {
+	margin: 10px 30%; /*top and bottom have 10px margin but left and right are at 30% */
+}
+
+.image-container img {
+	width: 100%; /* for each image in the image-container, display all the same width of 100%; the images are compressed to be proportional */
+	margin-top: 10px;
+}
+
+
+/* Adjustments for smaller devices with media querries */
+/* anything less than 600px */
+@media screen and (max-width: 600px) {
+	h1, h2 {
+		font-size: 20;
+	}
+	
+	.image-container {
+		margin: 10px; 
+	}
 }

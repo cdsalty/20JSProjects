@@ -1,23 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Infintite Scrolling</title>
-		<link
-			rel="stylesheet"
-			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.min.css"
-		/>
-		<link rel="stylesheet" href="style.css" />
-	</head>
-	<body>
-		<h2>Infinite Scrolling using the Unsplash API</h2>
 
-		<!-- Loading/Spinner -->
-		<div class="loader" id="loader">
-			<img src="loadingSpinner.svg" alt="Loading" />
-		</div>
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Infintite Scrolling</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.min.css" />
+	<link rel="stylesheet" href="style.css" />
+</head>
 
-		<script src="script.js"></script>
-	</body>
+<body>
+	<h2>Infinite Scrolling using the Unsplash API</h2>
+
+	<!-- Loading/Spinner -->
+	<div class="loader" id="loader" hidden>
+		<!-- <div class="loader" id="loader"> -->
+		<img src="loadingSpinner.svg" alt="Loading" />
+	</div>
+
+	<!-- Image Container -->
+	<div class="image-container" id="image-container">
+		<img
+			src="https://images.unsplash.com/photo-1484199383121-dfa3c30608cd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1189&q=80"
+			alt="Seaside Florida Beach From Above">
+		<img
+			src="https://images.unsplash.com/photo-1526563821541-c31bf2fc52dd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80"
+			alt="pretty view of beach">
+		<img src="https://images.unsplash.com/photo-1557434440-0a6584e2edc4?ixlib=rb-1.2.1&auto=format&fit=crop&w=658&q=80"
+			alt="">
+		<img
+			src="https://images.unsplash.com/photo-1543253918-5a6777d56824?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=675&q=80"
+			alt="Santa Rosa Beach">
+	</div>
+
+	<script src="script.js"></script>
+</body>
+
 </html>
