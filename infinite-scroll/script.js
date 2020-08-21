@@ -14,7 +14,7 @@ const setAttributes = (element, attributes) => {
   // FOR EACH INDIVIDUAL KEY IN THAT IS INSIDE OF ATTRIBUTES, return the key and the attribute TO THAT SPECIFIC KEY. 
   for (const key in attributes) {
     // element.setAttribute(key, attributes[key])
-    return element.setAttribute(key, attributes[key])
+    return element.setAttribute(key, attributes[key]) // --> why not just attributes since the key is already associated with it. 
   }
 }
 
@@ -37,18 +37,11 @@ function displayPhotos() {
       alt: photo.alt_description,
       title: photo.alt_description
     });
-    // setAttributes function removes the unnecesary code below.
-    // img.setAttribute('src', photo.urls.regular);
-    // img.setAttribute('alt', photo.alt_description);
-    // img.setAttribute('title', photo.alt_description);
-    // <img src = "photo.urls.regular" alt = "photo.alt_description" title="photo.alt_description" >
-
     // Put <img> inside <a>; then put inside imageContainer Element
     item.appendChild(img);  // 1st: take the item varaible(anchor tag) and append to it the image element
     imageContainer.appendChild(item); // 2nd: add the item element created to the DOM inside the imageContainer class
   });
 }
-
 
 // Get photos from unsplash api
 async function getPhotos() {
@@ -59,9 +52,26 @@ async function getPhotos() {
     displayPhotos();
   } catch (error) {
     console.log(error)
-
   }
 }
 
+// Scroll Event (check if near botttom)
+window.addEventListener('scroll', (() => {
+  if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 1000) {
+    getPhotos()
+    console.log("calling getPhotos again");
+  }
+}));
 // Funtion to run on load
 getPhotos();
+
+
+// window.innerHeight: TOTAL HEIGHT OF THE BROWSER WINDOW (fixed unless the window is resized)
+// window.scrollY: DISTANCE FROM TOP OF PAGE THE USER HAS SCROLLED. (as the user is scrolling down) 
+  // window.scrollY will continue to go up as the user scrolls further down the page.
+
+  // Add these two numbers up on the left side of an if statment to compare them to...
+    // ANSWER: document.body.offsetHeight THE HEIGHT OF EVERYTHING IN THE BODY, ((((  INCLUDING WHAT IS NOT IN THE VIEW   ))))
+      // ---> (so when user hits about 3/4th the way down the page, or " 1000px or whatever amount you choose
+      //        less than the document-offsetHeight")
+          // ---> need to subtract from offsetHeight, TO TRIGGER EVENT BEFORE BOTTOM IS REACHED
