@@ -1,13 +1,20 @@
 const imageContainer = document.getElementById('image-container');
 const loader = document.getElementById('loader');
 
-const count = 10; // represents how many pictures to return/display.  
-// variable for photosArray
-let photosArray = [];
+let ready = false;
+let imagesLoaded = 0;
+let totalImages = 0;
+let photosArray = []; // variable for photosArray
 
 // Unsplash API
+const count = 30;
 const apiKey = 'k59C4PPe8QTSxOUWuFR8a3ZSVpojkfURvsQX-4V4VyI';
 const apiUrl = `https://api.unsplash.com/photos/random/?client_id=${apiKey}&count=${count}`;
+
+// check if all images were loaded
+const imageLoaded = () => {
+  console.log('image-loaded');  // should run on each individual image
+}
 
 // HELPER FUNCTION (to make code cleaner and DRY)
 const setAttributes = (element, attributes) => {
@@ -30,6 +37,7 @@ function displayPhotos() {
       target: '_blank',
     });
     // item = <a href = "'photo.links.html' tartget='_blank'">
+
     // Create <img> for photo
     const img = document.createElement('img');
     setAttributes(img, {
@@ -37,6 +45,10 @@ function displayPhotos() {
       alt: photo.alt_description,
       title: photo.alt_description
     });
+
+    // Event Listener: check when each image is finished loading
+    img.addEventListener('load', imageLoaded);
+
     // Put <img> inside <a>; then put inside imageContainer Element
     item.appendChild(img);  // 1st: take the item varaible(anchor tag) and append to it the image element
     imageContainer.appendChild(item); // 2nd: add the item element created to the DOM inside the imageContainer class
@@ -59,7 +71,7 @@ async function getPhotos() {
 window.addEventListener('scroll', (() => {
   if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 1000) {
     getPhotos()
-    console.log("calling getPhotos again");
+    // console.log("calling getPhotos again");
   }
 }));
 // Funtion to run on load
