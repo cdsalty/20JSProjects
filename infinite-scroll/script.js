@@ -1,19 +1,28 @@
 const imageContainer = document.getElementById('image-container');
 const loader = document.getElementById('loader');
 
-let ready = false;
-let imagesLoaded = 0;
-let totalImages = 0;
+let ready = false;  // when page first loads, be false
+let imagesLoaded = 0; // will follow the count as it ticks up to thirty
+let totalImages = 0;  // will let us know when it's done loading everything
 let photosArray = []; // variable for photosArray
+
 
 // Unsplash API
 const count = 30;
 const apiKey = 'k59C4PPe8QTSxOUWuFR8a3ZSVpojkfURvsQX-4V4VyI';
 const apiUrl = `https://api.unsplash.com/photos/random/?client_id=${apiKey}&count=${count}`;
 
-// check if all images were loaded
+// Check if all images loaded
 const imageLoaded = () => {
-  console.log('image-loaded');  // should run on each individual image
+  imagesLoaded++; // to increment the imagesLoaded value by one for each image loaded
+  console.log(imagesLoaded)
+  // determine if images are all loaded (should be a total of 30 on start)
+  if (imagesLoaded === totalImages) {
+    ready = true; // will only be true once everything is ready and loaded
+    loader.hidden = true;
+    console.log(`ready = ${ready}`);
+
+  }
 }
 
 // HELPER FUNCTION (to make code cleaner and DRY)
@@ -28,6 +37,9 @@ const setAttributes = (element, attributes) => {
 
 // Create Elements for Links & Photos; Add to Dom
 function displayPhotos() {
+  imagesLoaded = 0;
+  totalImages = photosArray.length;
+  console.log(`total images: ${totalImages}`)
   photosArray.forEach((photo) => {
     // create <anchor> element to link to Unsplash
     const item = document.createElement('a'); // creates a blank anchor element
@@ -46,10 +58,10 @@ function displayPhotos() {
       title: photo.alt_description
     });
 
-    // Event Listener: check when each image is finished loading
+    // Event Listener to check when each image is finished loading
     img.addEventListener('load', imageLoaded);
 
-    // Put <img> inside <a>; then put inside imageContainer Element
+    // Put <img> inside <a>; then put <a> inside imageContainer Element
     item.appendChild(img);  // 1st: take the item varaible(anchor tag) and append to it the image element
     imageContainer.appendChild(item); // 2nd: add the item element created to the DOM inside the imageContainer class
   });
@@ -69,9 +81,11 @@ async function getPhotos() {
 
 // Scroll Event (check if near botttom)
 window.addEventListener('scroll', (() => {
-  if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 1000) {
+  if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 1000 && ready) {
     getPhotos()
     // console.log("calling getPhotos again");
+    // after getting the photos, return ready to the state of 'false'
+    ready = false;
   }
 }));
 // Funtion to run on load
@@ -87,3 +101,11 @@ getPhotos();
       // ---> (so when user hits about 3/4th the way down the page, or " 1000px or whatever amount you choose
       //        less than the document-offsetHeight")
           // ---> need to subtract from offsetHeight, TO TRIGGER EVENT BEFORE BOTTOM IS REACHED
+
+
+/*
+the left side needs to be bigger than the right side A N D the boolean conidition needs to "ready"
+(window.innerHeight + window.scrollY >= document.body.offsetHeight - 1000 && ready)
+(height of browswer window + distance from top of page that's been scrolled down too - 1000 && all the images are loaded) THEN call getPhotos
+
+*/
