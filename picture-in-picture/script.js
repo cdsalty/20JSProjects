@@ -7,6 +7,7 @@ const selectMediaStream = async () => {
     // screen capture api: https://developer.mozilla.org/en-US/docs/Web/API/Screen_Capture_API/Using_Screen_Capture
     const mediaStream = await navigator.mediaDevices.getDisplayMedia(); // directly from docs above
     videoElement.srcObject = mediaStream;
+    // onloadedmetadeata is true once it has finished loaded 
     videoElement.onloadedmetadata = () => {
       videoElement.play();
     }
@@ -15,7 +16,14 @@ const selectMediaStream = async () => {
   }
 }
 
-
+// Get control of the video functionality:
+button.addEventListener("click", async () => {
+  button.disabled = true;
+  // start pic-in-pic
+  await videoElement.requestPictureInPicture();
+  // reset button: (not sure why?)
+  button.disable = false;
+})
 
 // onLoad Function
 selectMediaStream();
