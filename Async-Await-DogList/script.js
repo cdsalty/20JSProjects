@@ -34,16 +34,39 @@ const loadByBreed = async (dogBreed) => {
     const dogBreedApi = `https://dog.ceo/api/breed/${dogBreed}/images`;
     const response = await fetch(dogBreedApi);
     const data = await response.json();
-    console.log(data.message);
+    // console.log(data.message);
     // make it happen! show the images!
     createSlideShow(data.message);  // data.message represents images in the createSlideShow function
   }
 }
-// PRIMARY FUNCTIONALITY: TO CREATE THE HTML FOR THE EMPTY SLIDESHOW DIV
+// PRIMARY FUNCTIONALITY: CREATE SLIDESHOW
 const createSlideShow = (images) => {
+  let currentPosition = 0;  // to be used to keep track of which image is being used
   // console.log(dataMessagesImages  )
   document.getElementById("slideshow").innerHTML = `
-    <div class="slide" style = "background-image: url('${images[0]}')"></div>
-    <div class = "slide"></div>
+    <div class="slide" style="background-image: url('${images[0]}')"></div>
+    <div class="slide" style = "background-image: url('${images[1]}')"></div>
   `
+  // Add 2(places) for the currentPosition (currentPosition = currentPosition + 2;)
+  currentPosition += 2;
+  // Every 3 seconds, advance the currentPosition one more
+  setInterval(nextSlide, 3000);
+
+  // reCall the nextSlide function inside this scope (because we need access to the currentPositions current place inside the iteration)
+  // ** PREVIOUSLY, I HAD an arrow function and this prevented it from calling nextSlide 
+  // const nextSlide = () => { // ERROR: script.js:53 Uncaught (in promise) ReferenceError: Cannot access 'nextSlide' before initialization
+  function nextSlide() {
+    document.getElementById("slideshow").insertAdjacentHTML("beforeend", `<div class="slide" style = "background-image: url('${images[currentPosition]}')"></div>`);
+    // remove the first image 
+    setTimeout(() => {
+      document.querySelector(".slide").remove()
+    }, 1000);
+    // Circle back to first image once list of images runs out
+    if (currentPosition + 1 >= images.length) {
+      currentPosition = 0
+    } else {
+      currentPosition++
+    }
+  }
 }
+
