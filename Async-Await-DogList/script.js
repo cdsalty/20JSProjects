@@ -1,5 +1,3 @@
-// console.log("sanity-check");
-
 // FETCH DATA 
 const getUrlData = async () => {
   const url = "https://dog.ceo/api/breeds/list/all";
@@ -55,7 +53,8 @@ const createSlideShow = (images) => {
   // reCall the nextSlide function inside this scope (because we need access to the currentPositions current place inside the iteration)
   // ** PREVIOUSLY, I HAD an arrow function and this prevented it from calling nextSlide 
   // const nextSlide = () => { // ERROR: script.js:53 Uncaught (in promise) ReferenceError: Cannot access 'nextSlide' before initialization
-  function nextSlide() {
+
+  const nextSlide = () => {
     document.getElementById("slideshow").insertAdjacentHTML("beforeend", `<div class="slide" style = "background-image: url('${images[currentPosition]}')"></div>`);
     // remove the first image 
     setTimeout(() => {
@@ -70,3 +69,4 @@ const createSlideShow = (images) => {
   }
 }
 
+// Left off at: https://youtu.be/AVmGmLFcukM?t=3541

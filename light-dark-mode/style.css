@@ -118,7 +118,8 @@ img {
 }
 
 .light-on{
-  background-color: yellow;
+  font-size: 25px;
+  background-color: rgb(250, 250, 203);
 }
 
 button {
@@ -128,10 +129,11 @@ button {
   border-radius: 10px;
   margin-right: 10px;
   border: 2px solid var(--primary-color);
-  font-size: 15px;
+  font-size: 20px;
   outline: none;
 }
 .light-text {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-display: bold;
   font-size: 24px !important;
 }
@@ -269,6 +271,6 @@ input:checked + .slider::before {
 }
 
 .fas {
-  font-size: 30px;
+  font-size: 30px;  /* tp determine size of icon*/
   margin-right: 5px;
 }
