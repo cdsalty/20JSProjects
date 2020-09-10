@@ -14,7 +14,7 @@ getUrlData();
 
 // SELECT ELEMENT: return the data fetched into a switch/select element
 const createBreedList = (breedList) => {
-  document.getElementById("dog-breed").innerHTML = `
+  document.getElementById("breed").innerHTML = `
     <select onchange = "loadByBreed(this.value)">
     <option>Choose a Dog Breed</option>
     ${Object.keys(breedList).map((breed) => {
@@ -26,6 +26,7 @@ const createBreedList = (breedList) => {
 }
 
 // DogBreed API call (passing in the breed of the dog)
+// PRIMARY JOB IS TO "L O A D" THE DATA
 const loadByBreed = async (dogBreed) => {
   // console.log(dogBreed); RETURNS THE DOG BREED SELECTED
   if (dogBreed != "Choose a Dog Breed") {
@@ -33,6 +34,16 @@ const loadByBreed = async (dogBreed) => {
     const dogBreedApi = `https://dog.ceo/api/breed/${dogBreed}/images`;
     const response = await fetch(dogBreedApi);
     const data = await response.json();
-    console.log(data);
+    console.log(data.message);
+    // make it happen! show the images!
+    createSlideShow(data.message);  // data.message represents images in the createSlideShow function
   }
+}
+// PRIMARY FUNCTIONALITY: TO CREATE THE HTML FOR THE EMPTY SLIDESHOW DIV
+const createSlideShow = (images) => {
+  // console.log(dataMessagesImages  )
+  document.getElementById("slideshow").innerHTML = `
+    <div class="slide" style = "background-image: url('${images[0]}')"></div>
+    <div class = "slide"></div>
+  `
 }
