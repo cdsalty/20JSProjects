@@ -3,13 +3,13 @@
 // FETCH DATA 
 const getUrlData = async () => {
   const url = "https://dog.ceo/api/breeds/list/all";
-  const response = await fetch(url);
+  const response = await fetch(url);  // No more action until the response is received.
   const data = await response.json();
   // console.log(data);  // I want data to be passed into a function that will place it inside a select/dropdown list
   const listOfDogBreeds = data.message
   createBreedList(listOfDogBreeds)
 }
-// GET/FETCH DATA
+// GET the FETCHed DATA
 getUrlData();
 
 // SELECT ELEMENT: return the data fetched into a switch/select element
