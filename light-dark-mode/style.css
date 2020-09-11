@@ -135,7 +135,8 @@ button {
 .light-text {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-display: bold;
-  font-size: 24px !important;
+  font-size: 20px !important;
+  
 }
 
 button:disabled {
