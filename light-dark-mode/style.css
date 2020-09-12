@@ -272,6 +272,6 @@ input:checked + .slider::before {
 }
 
 .fas {
-  font-size: 30px;  /* tp determine size of icon*/
+  font-size: 30px;  /* t0 determine size of icon*/
   margin-right: 5px;
 }

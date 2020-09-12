@@ -10,7 +10,29 @@ const textBox = document.getElementById('text-box');
 const darkMode = () => {
   nav.style.backgroundColor = 'rgb(0 0 0 / 50%)';
   textBox.style.backgroundColor = 'rgb(255 255 255 / 50%)';
+  // Challenge: Change the div of toggle-icon when clicked so it says "Dark Mode" and changes icon
   console.log(toggleIcon.children);
+  console.log("The Dark Side");
+  toggleIcon.children[0].textContent = 'Dark Mode';
+  toggleIcon.children[1].classList.remove('fa-lightbulb', 'light-on');  // below I use other options such as replace
+  toggleIcon.children[1].classList.add('fa-moon');
+  image1.src = "img/undraw_proud_coder_dark.svg";
+  image2.src = "img/undraw_feeling_proud_dark.svg";
+  image3.src = "img/undraw_conceptual_idea_dark.svg";
+}
+
+// Light Mode Functionality
+const lightMode = () => {
+  nav.style.backgroundColor = 'rgb(255 255 255 / 50%)';
+  textBox.style.backgroundColor = 'rgb(0 0 0 / 50%)';
+  console.log("Light Mode Enabled");
+  toggleIcon.children[0].textContent = 'Light Mode';
+  // toggleIcon.children[1].classList.replace('fa-moon', 'fa-lightbulb');  // prevents my light from turning back on....
+  toggleIcon.children[1].classList.remove('fa-moon');
+  toggleIcon.children[1].classList.add('fa-lightbulb', 'light-on');
+  image1.src = "img/undraw_proud_coder_light.svg";
+  image2.src = "img/undraw_feeling_proud_light.svg";
+  image3.src = "img/undraw_conceptual_idea_light.svg";
 }
 
 
