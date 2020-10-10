@@ -10,12 +10,12 @@ const displayDrinks = ({ drinks }) => { // or data and then will have to further
     section.innerHTML = null;
     return;
   }
-
   const newDrinks = drinks.map((drink) => {
+    const { idDrink: id, strDrink: name, strDrinkThumb: image } = drink;
     return `<a href="drink.html">
-        <article class="cocktail" data-id="1">
-          <img src="./cocktail.jpg" alt="cocktail" />
-          <h3>martini</h3>
+        <article class="cocktail" data-id="${id}">
+          <img src="${image}" alt="${name}" />
+          <h3>${name}</h3>
         </article>
       </a>`
   }).join(" ");
@@ -30,7 +30,7 @@ export default displayDrinks;
 
 /*]
 
-In this function, what matters the most is the 'drinks' variable we are passing in.
+In this function, what matters the most is the 'drinks' variable getting passed in.
   - Drinks will be an array or null;
 
 
