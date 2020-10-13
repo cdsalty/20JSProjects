@@ -20,12 +20,13 @@ const displayDrinks = ({ drinks }) => { // or data and then will have to further
           <h3>${name}</h3>
         </article>
       </a>`
-  }).join(" ");
+  }).join('');
   // hide loading
   hideLoading();
   title.textContent = "";
   section.innerHTML = newDrinks;
-  // return section;
+  // console.log(section)
+  return section;
 }
 
 export default displayDrinks;

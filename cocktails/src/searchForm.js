@@ -18,6 +18,6 @@ form.addEventListener("keyup", (e) => {
   if (!value) {
     return
   }
-  console.log(value)
+  // console.log(`The user input value is: ${value}`)
   presentDrinks(`${baseUrl}${value}`);  // retrieves http://127.0.0.1:5500/?drink=ab  -> drink = ab
 })
